@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# requires:
+#     bash
+#     fish
+#     wget
+
+echo "Install Conda (Miniconda) on fish."
+
+mkdir -p $HOME/tmp
+
+if [ "$(uname)" == "Darwin" ]; then
+    OS=MacOS
+elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
+    OS=Linux
+else
+    echo "Fail to install conda."
+    echo "Your platform $($(uname -a)) is not supported."
+    exit 1
+fi
+echo $OS
+
+CONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-latest-$OS-x86_64.sh
+wget $CONDA_URL -O ~/tmp/conda_installer.bash
+bash $HOME/tmp/conda_installer.bash -b -p $HOME/conda
+source $HOME/conda/bin/activate
+conda init fish
+rm $HOME/tmp/conda_installer.bash

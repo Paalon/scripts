@@ -1,0 +1,15 @@
+#!/usr/bin/env fish
+
+# requires:
+#     fish
+
+echo "Uninstall Conda."
+
+rm -r $HOME/conda
+[ -e $HOME/.condarc ] && rm $HOME/.condarc
+rm -r $HOME/.conda
+[ -e $HOME/.condarc ] && rm -r $HOME/.continuum
+
+sed '/# >>> conda initialize >>>/,/# <<< conda initialize <<</d' $HOME/.config/fish/config.fish > $HOME/tmp/config.fish
+cat $HOME/tmp/config.fish > $HOME/.config/fish/config.fish
+rm $HOME/tmp/config.fish

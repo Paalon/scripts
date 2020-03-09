@@ -1,0 +1,8 @@
+#!/usr/bin/env fish
+
+# requires:
+#     fish
+
+echo "Update Conda."
+
+conda update -c conda-forge -c pytorch --all
